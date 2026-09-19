@@ -1,0 +1,369 @@
+// HealthCare+ 3D body map
+// A smooth, mannequin-style 3D figure built with Three.js.
+// Drag to turn it, tap a body part to choose it.
+// If Three.js or WebGL isn't available, this does nothing
+// and the flat drawing stays as a backup.
+
+(function initBody3D() {
+    const map = document.querySelector(".body-map");
+
+    if (!map || typeof THREE === "undefined") return;
+
+    let renderer;
+
+    try {
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    } catch (error) {
+        return;
+    }
+
+    const reduceMotion =
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const holder = document.createElement("div");
+    holder.className = "body-3d";
+
+    const canvas = renderer.domElement;
+    canvas.setAttribute("aria-hidden", "true");
+
+    holder.appendChild(canvas);
+    map.prepend(holder);
+    map.classList.add("is-3d");
+
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+    const panel = map.closest(".how-panel");
+    const caption = panel ? panel.querySelector(".panel-caption") : null;
+
+    if (caption) {
+        caption.textContent = "Tap where the wound is, or drag to turn";
+    }
+
+
+    // ---------- Scene, camera and lights ----------
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 50);
+    camera.position.set(0, 1.75, 8.2);
+    camera.lookAt(0, 1.62, 0);
+
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x9fbcb2, 0.85));
+
+    const keyLight = new THREE.DirectionalLight(0xffffff, 0.75);
+    keyLight.position.set(2.5, 4, 4);
+    scene.add(keyLight);
+
+    const rimLight = new THREE.DirectionalLight(0xcfeee4, 0.45);
+    rimLight.position.set(-3, 3, -4);
+    scene.add(rimLight);
+
+
+    // ---------- Building blocks ----------
+
+    const COLORS = {
+        base: 0xdbe7e2,
+        hover: 0xbfd9cf,
+        selected: 0x157a66
+    };
+
+    const figure = new THREE.Group();
+    scene.add(figure);
+
+    const parts = [];
+
+    function addPart(geometry, area) {
+        const material = new THREE.MeshStandardMaterial({
+            color: COLORS.base,
+            roughness: 0.6,
+            metalness: 0.02
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.userData.area = area;
+
+        figure.add(mesh);
+        parts.push(mesh);
+
+        return mesh;
+    }
+
+    // A tapered capsule, rounded at both ends
+    function capsuleGeometry(radiusTop, radiusBottom, length) {
+        const points = [];
+        const steps = 10;
+
+        for (let i = 0; i <= steps; i++) {
+            const angle = -Math.PI / 2 + (i / steps) * (Math.PI / 2);
+            points.push(new THREE.Vector2(
+                Math.cos(angle) * radiusBottom,
+                -length / 2 + Math.sin(angle) * radiusBottom
+            ));
+        }
+
+        for (let i = 0; i <= steps; i++) {
+            const angle = (i / steps) * (Math.PI / 2);
+            points.push(new THREE.Vector2(
+                Math.cos(angle) * radiusTop,
+                length / 2 + Math.sin(angle) * radiusTop
+            ));
+        }
+
+        return new THREE.LatheGeometry(points, 28);
+    }
+
+    // A limb running from point a to point b
+    function limb(a, b, radiusA, radiusB, area) {
+        const start = new THREE.Vector3(a[0], a[1], a[2]);
+        const end = new THREE.Vector3(b[0], b[1], b[2]);
+        const length = start.distanceTo(end);
+
+        const mesh = addPart(capsuleGeometry(radiusA, radiusB, length), area);
+
+        mesh.position.copy(start).add(end).multiplyScalar(0.5);
+        mesh.quaternion.setFromUnitVectors(
+            new THREE.Vector3(0, 1, 0),
+            new THREE.Vector3().subVectors(start, end).normalize()
+        );
+
+        return mesh;
+    }
+
+    // A stretched sphere (head, hands, feet)
+    function blob(radius, scale, position, area) {
+        const mesh = addPart(new THREE.SphereGeometry(radius, 32, 24), area);
+        mesh.scale.set(scale[0], scale[1], scale[2]);
+        mesh.position.set(position[0], position[1], position[2]);
+        return mesh;
+    }
+
+
+    // ---------- The figure ----------
+
+    // Head and neck
+    blob(0.2, [0.92, 1.12, 1.0], [0, 3.07, 0.01], "head");
+    limb([0, 2.93, 0], [0, 2.72, 0], 0.075, 0.085, "head");
+
+    // Torso: a smooth body shape, flattened front to back
+    const torsoProfile = [
+        [0.00, 1.46], [0.24, 1.48], [0.34, 1.56], [0.37, 1.72],
+        [0.33, 1.92], [0.29, 2.08], [0.31, 2.26], [0.37, 2.46],
+        [0.41, 2.60], [0.38, 2.70], [0.24, 2.78], [0.10, 2.81],
+        [0.00, 2.82]
+    ].map(function (p) {
+        return new THREE.Vector2(p[0], p[1]);
+    });
+
+    const torso = addPart(new THREE.LatheGeometry(torsoProfile, 40), "chest");
+    torso.scale.set(1, 1, 0.6);
+
+    // Arms and hands (both sides)
+    [-1, 1].forEach(function (side) {
+        limb([0.46 * side, 2.62, 0], [0.56 * side, 2.0, 0.02], 0.09, 0.07, "hand");
+        limb([0.56 * side, 2.0, 0.02], [0.63 * side, 1.44, 0.08], 0.068, 0.052, "hand");
+        blob(0.075, [0.75, 1.45, 0.45], [0.655 * side, 1.28, 0.1], "hand");
+    });
+
+    // Legs and feet (both sides)
+    [-1, 1].forEach(function (side) {
+        limb([0.17 * side, 1.52, 0], [0.19 * side, 0.86, 0.02], 0.15, 0.095, "leg");
+        limb([0.19 * side, 0.86, 0.02], [0.2 * side, 0.14, -0.01], 0.092, 0.06, "leg");
+        blob(0.085, [0.95, 0.55, 2.1], [0.21 * side, 0.07, 0.09], "foot");
+    });
+
+    // Soft shadow on the floor
+    const shadowCanvas = document.createElement("canvas");
+    shadowCanvas.width = 128;
+    shadowCanvas.height = 128;
+
+    const shadowCtx = shadowCanvas.getContext("2d");
+    const gradient = shadowCtx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    gradient.addColorStop(0, "rgba(15, 47, 42, 0.28)");
+    gradient.addColorStop(1, "rgba(15, 47, 42, 0)");
+    shadowCtx.fillStyle = gradient;
+    shadowCtx.fillRect(0, 0, 128, 128);
+
+    const shadow = new THREE.Mesh(
+        new THREE.PlaneGeometry(1.8, 1.0),
+        new THREE.MeshBasicMaterial({
+            map: new THREE.CanvasTexture(shadowCanvas),
+            transparent: true,
+            depthWrite: false
+        })
+    );
+
+    shadow.rotation.x = -Math.PI / 2;
+    shadow.position.y = 0.005;
+    scene.add(shadow);
+
+
+    // ---------- Colours for hover and selection ----------
+
+    let selectedArea = null;
+    let hoveredArea = null;
+
+    const initiallySelected = map.querySelector(".body-point.is-selected");
+
+    if (initiallySelected) {
+        selectedArea = initiallySelected.dataset.area;
+    }
+
+    function paint() {
+        parts.forEach(function (part) {
+            const area = part.userData.area;
+
+            let color = COLORS.base;
+            if (area === hoveredArea) color = COLORS.hover;
+            if (area === selectedArea) color = COLORS.selected;
+
+            part.material.color.setHex(color);
+        });
+    }
+
+    paint();
+
+    // Keep in sync when a label button is clicked
+    map.addEventListener("areachange", function (event) {
+        selectedArea = event.detail.area;
+        paint();
+    });
+
+
+    // ---------- Drag to turn, tap to choose ----------
+
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+
+    let rotation = 0.35;
+    let target = 0.35;
+    let dragging = false;
+    let lastX = 0;
+    let moved = 0;
+    let userHasTurned = false;
+
+    function partUnderPointer(event) {
+        const rect = canvas.getBoundingClientRect();
+
+        pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(pointer, camera);
+
+        const hit = raycaster.intersectObjects(parts, false)[0];
+        return hit ? hit.object : null;
+    }
+
+    function setHover(part) {
+        const area = part ? part.userData.area : null;
+
+        canvas.style.cursor = part ? "pointer" : "grab";
+
+        if (area !== hoveredArea) {
+            hoveredArea = area;
+            paint();
+        }
+    }
+
+    canvas.addEventListener("pointerdown", function (event) {
+        dragging = true;
+        moved = 0;
+        lastX = event.clientX;
+        canvas.setPointerCapture(event.pointerId);
+    });
+
+    canvas.addEventListener("pointermove", function (event) {
+        if (dragging) {
+            const dx = event.clientX - lastX;
+            lastX = event.clientX;
+            moved += Math.abs(dx);
+
+            if (moved > 6) {
+                userHasTurned = true;
+                target += dx * 0.012;
+            }
+            return;
+        }
+
+        if (event.pointerType === "mouse") {
+            setHover(partUnderPointer(event));
+        }
+    });
+
+    canvas.addEventListener("pointerup", function (event) {
+        if (!dragging) return;
+        dragging = false;
+
+        // A short press without dragging counts as a tap
+        if (moved <= 6) {
+            const part = partUnderPointer(event);
+
+            if (part && typeof map.selectArea === "function") {
+                map.selectArea(part.userData.area);
+            }
+        }
+    });
+
+    canvas.addEventListener("pointercancel", function () {
+        dragging = false;
+    });
+
+    canvas.addEventListener("pointerleave", function () {
+        if (!dragging) setHover(null);
+    });
+
+
+    // ---------- Drawing ----------
+
+    let lastWidth = 0;
+    let lastHeight = 0;
+    let frameId = null;
+    const startTime = performance.now();
+
+    function resizeIfNeeded() {
+        const width = holder.clientWidth;
+        const height = holder.clientHeight;
+
+        if (width === lastWidth && height === lastHeight) return;
+
+        lastWidth = width;
+        lastHeight = height;
+
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    }
+
+    function frame() {
+        frameId = requestAnimationFrame(frame);
+
+        // Skip drawing while the panel is hidden
+        if (!holder.clientWidth || !holder.clientHeight) return;
+
+        resizeIfNeeded();
+
+        // A gentle sway until the person turns it themselves
+        if (!userHasTurned && !reduceMotion) {
+            const seconds = (performance.now() - startTime) / 1000;
+            target = 0.35 + Math.sin(seconds * 0.6) * 0.45;
+        }
+
+        rotation += (target - rotation) * 0.12;
+        figure.rotation.y = rotation;
+
+        renderer.render(scene, camera);
+    }
+
+    // Only animate while the figure is on screen
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting && frameId === null) {
+                frame();
+            } else if (!entry.isIntersecting && frameId !== null) {
+                cancelAnimationFrame(frameId);
+                frameId = null;
+            }
+        });
+    });
+
+    observer.observe(holder);
+})();

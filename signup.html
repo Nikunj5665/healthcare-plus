@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create your account | HealthCare+</title>
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta name="theme-color" content="#0f6b7a">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- How the link looks when shared (WhatsApp, Facebook, X) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="HealthCare+">
+    <meta property="og:title" content="Create your account | HealthCare+">
+    <meta property="og:description" content="Create a free account to track a long-term wound and get clear next steps.">
+    <meta property="og:image" content="share-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+</svg>
+
+<div class="auth">
+
+    <aside class="auth-side auth-side-signup">
+        <a class="brand" href="index.html">
+            <span class="brand-mark"><svg class="icon"><use href="#i-plus"/></svg></span>
+            HealthCare+
+        </a>
+
+        <div>
+            <h1>Follow your wound, week by week</h1>
+            <p>
+                Create a free account to check a long-term wound, get clear next
+                steps and keep every photo in one private place.
+            </p>
+        </div>
+
+        <div class="auth-mini" aria-hidden="true">
+            <div><i style="background: var(--green)"></i>Carry on with your care plan</div>
+            <div><i style="background: var(--amber)"></i>Get the wound seen soon</div>
+            <div><i style="background: var(--red)"></i>Get medical help now</div>
+        </div>
+    </aside>
+
+
+    <main class="auth-main">
+        <div class="auth-card">
+
+            <h2>Create your account</h2>
+            <p class="auth-sub">It takes less than a minute.</p>
+
+            <div class="device-note">
+                <svg class="icon"><use href="#i-lock"/></svg>
+                <p>
+                    <strong>This account lives on this device only.</strong>
+                    Your photos and checks are saved in this browser and never
+                    reach our servers, so you won't be able to log in from
+                    another phone or computer, and clearing your browsing data
+                    erases them for good.
+                </p>
+            </div>
+
+            <form id="signupForm" novalidate>
+
+                <div class="form-error" id="signupError" role="alert"></div>
+
+                <div class="field">
+                    <label for="signupName">Full name</label>
+                    <input class="input" type="text" id="signupName" autocomplete="name" required>
+                </div>
+
+                <div class="field">
+                    <label for="signupEmail">Email address</label>
+                    <input class="input" type="email" id="signupEmail" autocomplete="email" placeholder="name@example.com" required>
+                </div>
+
+                <div class="field">
+                    <label for="signupPassword">Password</label>
+                    <div class="password-field">
+                        <input class="input" type="password" id="signupPassword" autocomplete="new-password" minlength="8" required aria-describedby="passwordHint">
+                        <button class="password-toggle" type="button" data-toggle-password="signupPassword" aria-label="Show password">
+                            <svg class="icon"><use href="#i-eye"/></svg>
+                        </button>
+                    </div>
+                    <span class="hint" id="passwordHint">At least 8 characters.</span>
+                </div>
+
+                <div class="field">
+                    <label for="signupConfirm">Confirm password</label>
+                    <div class="password-field">
+                        <input class="input" type="password" id="signupConfirm" autocomplete="new-password" minlength="8" required>
+                        <button class="password-toggle" type="button" data-toggle-password="signupConfirm" aria-label="Show password">
+                            <svg class="icon"><use href="#i-eye"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <label class="check-row">
+                    <input type="checkbox" id="signupConsent" required>
+                    <span>
+                        I agree to the <a href="legal.html#terms">Terms of use</a> and
+                        <a href="legal.html#privacy">Privacy policy</a>, and I understand
+                        HealthCare+ gives guidance, not a medical diagnosis.
+                    </span>
+                </label>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit">
+                    Create account
+                </button>
+
+            </form>
+
+            <p class="auth-switch">
+                Already have an account? <a href="login.html">Log in</a>
+            </p>
+
+            <p class="auth-links"><a href="about.html">About HealthCare+</a> &middot; <a href="contact.html">Contact</a> &middot; <a href="index.html">Home</a></p>
+
+            <p class="demo-note">Demo version: your account is saved in this browser only.</p>
+
+        </div>
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

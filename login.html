@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in | HealthCare+</title>
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta name="theme-color" content="#0f6b7a">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- How the link looks when shared (WhatsApp, Facebook, X) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="HealthCare+">
+    <meta property="og:title" content="Log in | HealthCare+">
+    <meta property="og:description" content="Log in to start a new check or see how your wound has healed since your last photo.">
+    <meta property="og:image" content="share-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+</svg>
+
+<div class="auth">
+
+    <aside class="auth-side auth-side-login">
+        <a class="brand" href="index.html">
+            <span class="brand-mark"><svg class="icon"><use href="#i-plus"/></svg></span>
+            HealthCare+
+        </a>
+
+        <div>
+            <h1>Welcome back</h1>
+            <p>
+                Log in to start a new check or see how your wound has
+                healed since your last photo. Accounts are saved in the
+                browser you signed up on, so use that same device.
+            </p>
+        </div>
+
+        <div class="auth-mini" aria-hidden="true">
+            <div><i style="background: var(--green)"></i>Look after it at home</div>
+            <div><i style="background: var(--amber)"></i>See a doctor soon</div>
+            <div><i style="background: var(--red)"></i>Get medical help now</div>
+        </div>
+    </aside>
+
+
+    <main class="auth-main">
+        <div class="auth-card">
+
+            <h2>Log in</h2>
+            <p class="auth-sub">Use the email and password you signed up with.</p>
+
+            <form id="loginForm" novalidate>
+
+                <div class="form-error" id="loginError" role="alert"></div>
+
+                <div class="field">
+                    <label for="loginEmail">Email address</label>
+                    <input class="input" type="email" id="loginEmail" autocomplete="email" placeholder="name@example.com" required>
+                </div>
+
+                <div class="field">
+                    <label for="loginPassword">Password</label>
+                    <div class="password-field">
+                        <input class="input" type="password" id="loginPassword" autocomplete="current-password" required>
+                        <button class="password-toggle" type="button" data-toggle-password="loginPassword" aria-label="Show password">
+                            <svg class="icon"><use href="#i-eye"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit">
+                    Log in
+                </button>
+
+            </form>
+
+            <p class="auth-switch">
+                New to HealthCare+? <a href="signup.html">Create an account</a>
+            </p>
+
+            <p class="auth-links"><a href="about.html">About HealthCare+</a> &middot; <a href="contact.html">Contact</a> &middot; <a href="index.html">Home</a></p>
+
+            <p class="demo-note">Demo version: accounts are saved in this browser only.</p>
+
+        </div>
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

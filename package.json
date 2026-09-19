@@ -1,0 +1,14 @@
+{
+  "name": "health-tech-platform",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "HealthCare+ static site, with one serverless function for the contact form.",
+  "scripts": {
+    "dev": "node dev-server.js",
+    "start": "node dev-server.js"
+  },
+  "dependencies": {
+    "nodemailer": "^7.0.0"
+  }
+}

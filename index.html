@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare+ | Care for a wound that won't heal</title>
+    <meta name="description" content="Photograph a diabetic foot ulcer, pressure sore, leg ulcer or surgical wound, answer a few questions, and find out whether to carry on at home or get it seen.">
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta name="theme-color" content="#0f6b7a">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- How the link looks when shared (WhatsApp, Facebook, X) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="HealthCare+">
+    <meta property="og:title" content="HealthCare+ | Care for a wound that won't heal">
+    <meta property="og:description" content="Photograph a diabetic foot ulcer, pressure sore, leg ulcer or surgical wound, answer a few questions, and find out whether to carry on at home or get it seen.">
+    <meta property="og:image" content="share-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Icons (used with <use href="#i-name">) -->
+<svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-ulcer" viewBox="0 0 24 24"><ellipse cx="10.5" cy="14.5" rx="5.5" ry="6.5"/><circle cx="10.5" cy="15" r="2.1"/><circle cx="11.5" cy="4.6" r="1.4"/><circle cx="15" cy="5" r="1.4"/><circle cx="18" cy="6.8" r="1.4"/></symbol>
+    <symbol id="i-pressure" viewBox="0 0 24 24"><path d="M3 19.5v-6.5h18v6.5"/><path d="M3 13V8.5"/><path d="M21 13c0-2.3-1.8-3.2-4-3.2h-5.5V13"/><circle cx="7" cy="9.3" r="2.1"/></symbol>
+    <symbol id="i-vein" viewBox="0 0 24 24"><path d="M8.5 3.5h7c0 3 .4 5.1 1 7.3.6 2.6.5 5.4.5 9.2h-4.6c0-3.4-.2-5.6-.8-7.6-.5-1.7-1-3-1.1-5z"/><path d="M8.8 8.6h7.1M9.4 12.4h7.3"/></symbol>
+    <symbol id="i-suture" viewBox="0 0 24 24"><path d="M12 3.5v17"/><path d="M8.5 7h7M8.5 11h7M8.5 15h7M8.5 19h7"/></symbol>
+    <symbol id="i-stall" viewBox="0 0 24 24"><path d="M3.5 4v16.5H20"/><path d="M6.5 11c3.2 0 4.2.3 6 .5 2.1.2 3.6 1.2 6.4 1"/><circle cx="18.9" cy="12.5" r="1.4"/></symbol>
+    <symbol id="i-heal" viewBox="0 0 24 24"><path d="M3.5 17l5-5 4 3.5 8-8"/><path d="M15 7.5h5.5V13"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 21.5 20h-19L12 3.5z"/><path d="M12 10v4.5M12 17.2h.01"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5l7.5 3v5.5c0 4.5-3.2 7.9-7.5 9-4.3-1.1-7.5-4.5-7.5-9V6.5l7.5-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-doctor" viewBox="0 0 24 24"><path d="M6 3.5v5a4 4 0 0 0 8 0v-5"/><path d="M10 12.5v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10.5" r="2"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+</svg>
+
+
+<!-- =========================
+     Header
+========================= -->
+
+<header class="site-header">
+    <nav class="nav container" aria-label="Main">
+
+        <a class="brand" href="index.html">
+            <span class="brand-mark"><svg class="icon"><use href="#i-plus"/></svg></span>
+            HealthCare+
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu">
+            Menu
+        </button>
+
+        <div class="nav-menu" id="navMenu">
+            <a href="#helps">What it helps with</a>
+            <a href="#how">How it works</a>
+            <a href="#safety">Safety</a>
+            <a href="#faq">Questions</a>
+            <a href="about.html">About</a>
+
+            <div class="nav-actions">
+                <a class="btn btn-ghost" href="login.html">Log in</a>
+                <a class="btn btn-primary" href="signup.html">Get started</a>
+            </div>
+        </div>
+
+    </nav>
+</header>
+
+
+<main>
+
+<!-- =========================
+     Hero
+========================= -->
+
+<section class="hero">
+    <div class="container hero-grid">
+
+        <div class="hero-copy">
+            <h1>A wound that won't heal? Photograph it and know what to do next.</h1>
+
+            <p class="hero-lead">
+                HealthCare+ is built for long-term wounds &mdash; diabetic foot
+                ulcers, pressure sores, leg ulcers and surgical wounds. Take a
+                photo, answer a few questions, and find out whether to carry on
+                with your care plan or get the wound seen.
+            </p>
+
+            <div class="hero-actions">
+                <a class="btn btn-primary btn-lg" href="signup.html">Start a free check</a>
+                <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
+            </div>
+
+            <ul class="hero-trust">
+                <li><svg class="icon"><use href="#i-check"/></svg>Guidance in about a minute</li>
+                <li><svg class="icon"><use href="#i-check"/></svg>Only you see your photos</li>
+                <li><svg class="icon"><use href="#i-check"/></svg>Week-by-week healing you can show your doctor</li>
+            </ul>
+        </div>
+
+
+        <div class="hero-demo" aria-label="Example of a HealthCare+ check">
+
+            <div class="demo-card">
+                <div class="demo-top">
+                    <span>Example check</span>
+                    <span>Right heel</span>
+                </div>
+
+                <div class="demo-photo skin">
+                    <span class="wound"></span>
+                    <span class="demo-scan"></span>
+                    <span class="demo-tag">Ulcer found</span>
+                </div>
+
+                <div class="demo-answers">
+                    <span>Diabetic foot ulcer</span>
+                    <span>Open 6 weeks</span>
+                    <span>Pain 4 of 10</span>
+                    <span>No fever</span>
+                </div>
+
+                <div class="demo-result" data-level="amber">
+                    <div class="triage-scale">
+                        <span class="seg seg-green"></span>
+                        <span class="seg seg-amber"></span>
+                        <span class="seg seg-red"></span>
+                        <span class="triage-pin"></span>
+                    </div>
+                    <strong>See a doctor today</strong>
+                    <p>The edges look settled, but an ulcer on a diabetic foot always needs a professional check.</p>
+                </div>
+            </div>
+
+            <div class="demo-float">
+                <small>Healing tracker</small>
+                <strong>Getting smaller</strong>
+                <div class="mini-days">
+                    <span class="skin"><i class="wound" style="width: 60%"></i></span>
+                    <span class="skin"><i class="wound" style="width: 45%"></i></span>
+                    <span class="skin"><i class="wound" style="width: 30%"></i></span>
+                    <span class="skin"><i class="wound" style="width: 14%"></i></span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     Moving strip
+========================= -->
+
+<div class="marquee" aria-label="Long-term wounds HealthCare+ can help with">
+    <div class="marquee-track">
+        <ul>
+                <li><svg class="icon"><use href="#i-ulcer"/></svg>Diabetic foot ulcers</li>
+                <li><svg class="icon"><use href="#i-pressure"/></svg>Heel pressure sores</li>
+                <li><svg class="icon"><use href="#i-vein"/></svg>Venous leg ulcers</li>
+                <li><svg class="icon"><use href="#i-suture"/></svg>Surgical incisions</li>
+                <li><svg class="icon"><use href="#i-pressure"/></svg>Tailbone sores</li>
+                <li><svg class="icon"><use href="#i-stall"/></svg>Wounds that have stalled</li>
+                <li><svg class="icon"><use href="#i-ulcer"/></svg>Toe ulcers</li>
+                <li><svg class="icon"><use href="#i-suture"/></svg>Post-op dressings</li>
+                <li><svg class="icon"><use href="#i-vein"/></svg>Swollen, weeping legs</li>
+                <li><svg class="icon"><use href="#i-pressure"/></svg>Hip and elbow sores</li>
+                <li><svg class="icon"><use href="#i-stall"/></svg>Open longer than 4 weeks</li>
+                <li><svg class="icon"><use href="#i-heal"/></svg>Healing you want to track</li>
+        </ul>
+        <ul aria-hidden="true">
+                <li><svg class="icon"><use href="#i-ulcer"/></svg>Diabetic foot ulcers</li>
+                <li><svg class="icon"><use href="#i-pressure"/></svg>Heel pressure sores</li>
+                <li><svg class="icon"><use href="#i-vein"/></svg>Venous leg ulcers</li>
+                <li><svg class="icon"><use href="#i-suture"/></svg>Surgical incisions</li>
+                <li><svg class="icon"><use href="#i-pressure"/></svg>Tailbone sores</li>
+                <li><svg class="icon"><use href="#i-stall"/></svg>Wounds that have stalled</li>
+                <li><svg class="icon"><use href="#i-ulcer"/></svg>Toe ulcers</li>
+                <li><svg class="icon"><use href="#i-suture"/></svg>Post-op dressings</li>
+                <li><svg class="icon"><use href="#i-vein"/></svg>Swollen, weeping legs</li>
+                <li><svg class="icon"><use href="#i-pressure"/></svg>Hip and elbow sores</li>
+                <li><svg class="icon"><use href="#i-stall"/></svg>Open longer than 4 weeks</li>
+                <li><svg class="icon"><use href="#i-heal"/></svg>Healing you want to track</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- =========================
+     What it helps with
+========================= -->
+
+<section class="section" id="helps">
+    <div class="container">
+
+        <div class="section-head">
+            <h2>Made for wounds that take weeks, not days</h2>
+            <p>
+                A long-term wound changes slowly, so it's hard to tell from one
+                day to the next whether it's healing or getting worse.
+                HealthCare+ follows it with you.
+            </p>
+        </div>
+
+        <div class="helps-grid">
+            <article class="help-item">
+                <span class="help-icon"><svg class="icon"><use href="#i-ulcer"/></svg></span>
+                <h3>Diabetic foot ulcers</h3>
+                <p>Ulcers on the sole, heel or toes, where lost feeling can hide the damage.</p>
+            </article>
+
+            <article class="help-item">
+                <span class="help-icon"><svg class="icon"><use href="#i-pressure"/></svg></span>
+                <h3>Pressure sores</h3>
+                <p>Bedsores over the tailbone, hips, heels and elbows from sitting or lying too long.</p>
+            </article>
+
+            <article class="help-item">
+                <span class="help-icon"><svg class="icon"><use href="#i-vein"/></svg></span>
+                <h3>Venous leg ulcers</h3>
+                <p>Shallow, weeping ulcers on the lower leg, often with swelling and darkened skin.</p>
+            </article>
+
+            <article class="help-item">
+                <span class="help-icon"><svg class="icon"><use href="#i-suture"/></svg></span>
+                <h3>Surgical wounds</h3>
+                <p>Incisions, staples, drain sites and grafts you're looking after at home after an operation.</p>
+            </article>
+
+            <article class="help-item">
+                <span class="help-icon"><svg class="icon"><use href="#i-stall"/></svg></span>
+                <h3>Wounds that have stalled</h3>
+                <p>Anything still open after four weeks, or getting bigger instead of smaller.</p>
+            </article>
+
+            <article class="help-item">
+                <span class="help-icon"><svg class="icon"><use href="#i-heal"/></svg></span>
+                <h3>Healing you want to track</h3>
+                <p>Week-by-week photos that show whether a dressing or treatment is actually working.</p>
+            </article>
+        </div>
+
+        <aside class="not-for">
+            <svg class="icon"><use href="#i-alert"/></svg>
+            <div>
+                <h3>Not for fresh injuries</h3>
+                <p>
+                    HealthCare+ is for wounds you're managing over weeks. A new
+                    cut, a burn, an animal bite or a sting needs first aid and a
+                    doctor now, not a tracking app.
+                </p>
+            </div>
+        </aside>
+
+        <aside class="not-for">
+            <svg class="icon"><use href="#i-alert"/></svg>
+            <div>
+                <h3>Some wound changes are an emergency</h3>
+                <p>
+                    Black or dying tissue, a fever with shivering or confusion,
+                    red streaks spreading up the limb, or a limb that turns cold,
+                    blue or numb all need help right away.
+                </p>
+            </div>
+            <a class="btn btn-danger" href="tel:112">
+                <svg class="icon"><use href="#i-phone"/></svg>
+                Call 112
+            </a>
+        </aside>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     Doctor visits (carousel)
+========================= -->
+
+<section class="section moments" id="moments">
+    <div class="container moments-head">
+        <div class="section-head">
+            <h2>Better visits to your doctor</h2>
+            <p>HealthCare+ doesn't replace your wound clinic or doctor. It helps you know when to go, and makes every visit easier.</p>
+        </div>
+
+        <div class="carousel-controls">
+            <button class="carousel-btn" type="button" data-carousel-prev aria-label="Previous">
+                <svg class="icon"><use href="#i-arrow-left"/></svg>
+            </button>
+            <button class="carousel-btn" type="button" data-carousel-next aria-label="Next">
+                <svg class="icon"><use href="#i-arrow-right"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="moments-track" data-carousel tabindex="0" aria-label="Doctor visits">
+            <article class="moment">
+                <div class="moment-photo">
+                    <svg class="icon"><use href="#i-doctor"/></svg>
+                    <img src="moment-doctor-talk.jpg" alt="" loading="lazy" onerror="this.remove()">
+                </div>
+                <h3>Know when to go</h3>
+                <p>Every check tells you whether to carry on with your care plan or get the wound seen, so you're never left guessing.</p>
+            </article>
+
+            <article class="moment">
+                <div class="moment-photo">
+                    <svg class="icon"><use href="#i-doctor"/></svg>
+                    <img src="moment-doctor-tablet.jpg" alt="" loading="lazy" onerror="this.remove()">
+                </div>
+                <h3>Bring your photos along</h3>
+                <p>Show your doctor how the wound looked six weeks ago and exactly how it has changed since.</p>
+            </article>
+
+            <article class="moment">
+                <div class="moment-photo">
+                    <svg class="icon"><use href="#i-doctor"/></svg>
+                    <img src="moment-doctor-child.jpg" alt="" loading="lazy" onerror="this.remove()">
+                </div>
+                <h3>After an operation</h3>
+                <p>Keep an eye on an incision at home and spot an infection early, before it sets you back.</p>
+            </article>
+
+            <article class="moment">
+                <div class="moment-photo">
+                    <svg class="icon"><use href="#i-doctor"/></svg>
+                    <img src="moment-doctor-senior.jpg" alt="" loading="lazy" onerror="this.remove()">
+                </div>
+                <h3>For someone you care for</h3>
+                <p>Track a parent's pressure sore or leg ulcer between visits, and share the photos with their nurse.</p>
+            </article>
+
+            <article class="moment">
+                <div class="moment-photo">
+                    <svg class="icon"><use href="#i-doctor"/></svg>
+                    <img src="moment-doctor-dressing.jpg" alt="" loading="lazy" onerror="this.remove()">
+                </div>
+                <h3>Between dressing changes</h3>
+                <p>Photos taken between visits show your nurse whether the current dressing is working or needs changing.</p>
+            </article>
+    </div>
+</section>
+
+
+<!-- =========================
+     How it works
+========================= -->
+
+<section class="how" id="how">
+    <div class="container">
+
+        <div class="section-head">
+            <h2>From photo to a clear next step</h2>
+            <p>Five simple steps, and most people finish in about a minute.</p>
+        </div>
+
+        <div class="how-steps" role="tablist" aria-label="How it works">
+            <button class="how-step is-active" type="button" role="tab" aria-selected="true" aria-controls="how-panel-1">
+                <span>Step 1</span>
+                <strong>Choose the area</strong>
+            </button>
+            <button class="how-step" type="button" role="tab" aria-selected="false" aria-controls="how-panel-2">
+                <span>Step 2</span>
+                <strong>Take a photo</strong>
+            </button>
+            <button class="how-step" type="button" role="tab" aria-selected="false" aria-controls="how-panel-3">
+                <span>Step 3</span>
+                <strong>Answer questions</strong>
+            </button>
+            <button class="how-step" type="button" role="tab" aria-selected="false" aria-controls="how-panel-4">
+                <span>Step 4</span>
+                <strong>Get guidance</strong>
+            </button>
+            <button class="how-step" type="button" role="tab" aria-selected="false" aria-controls="how-panel-5">
+                <span>Step 5</span>
+                <strong>Track healing</strong>
+            </button>
+        </div>
+
+
+        <div class="how-stage">
+
+            <div class="how-visual">
+
+                <!-- Step 1: body map -->
+                <div class="how-panel is-active" id="how-panel-1" role="tabpanel">
+                    <p class="panel-caption">Tap where the wound is</p>
+
+                    <div class="body-map">
+                        <svg class="body-svg" viewBox="40 14 220 628" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <ellipse class="bm-floor" cx="150" cy="634" rx="70" ry="7"/>
+
+                          <g class="bm-part" data-area="leg">
+                            <g>
+                              <path class="skin" d="M152 372L203 372C204 410 200 442 196 472C194 500 196 530 192 562L188 600L167 600C165 570 162 540 161 510C160 486 158 466 156 446Z"/>
+                            </g>
+                            <g transform="translate(300 0) scale(-1 1)">
+                              <path class="skin" d="M152 372L203 372C204 410 200 442 196 472C194 500 196 530 192 562L188 600L167 600C165 570 162 540 161 510C160 486 158 466 156 446Z"/>
+                            </g>
+                            <path class="shorts" d="M104 292L196 292C200 318 204 348 206 382L156 386L150 350L144 386L94 382C96 348 100 318 104 292Z"/>
+                          </g>
+
+                          <g class="bm-part" data-area="foot">
+                            <g>
+                              <path class="skin" d="M167 594L189 594C193 604 199 614 199 623C199 631 191 634 179 634C167 634 160 631 160 623C160 613 164 604 167 594Z"/>
+                              <path class="skin shade" d="M166 598L190 598L189 594L167 594Z"/>
+                            </g>
+                            <g transform="translate(300 0) scale(-1 1)">
+                              <path class="skin" d="M167 594L189 594C193 604 199 614 199 623C199 631 191 634 179 634C167 634 160 631 160 623C160 613 164 604 167 594Z"/>
+                              <path class="skin shade" d="M166 598L190 598L189 594L167 594Z"/>
+                            </g>
+                          </g>
+
+                          <g class="bm-part" data-area="hand">
+                            <g>
+                              <path class="skin" d="M202 150C216 152 226 164 228 188L233 240C234 262 236 272 238 290L244 380L228 384L220 318C217 296 212 286 210 270L206 228L204 200Z"/>
+                              <path class="skin" d="M228 380L245 378C250 392 252 410 248 428C246 438 238 442 232 438C226 430 224 410 226 396Z"/>
+                              <path class="skin shade" d="M228 392C222 398 220 408 222 415C226 415 229 408 230 401Z"/>
+                              <path class="shirt" d="M198 145C218 146 230 160 232 186L234 214C222 219 211 219 203 216L199 180Z"/>
+                            </g>
+                            <g transform="translate(300 0) scale(-1 1)">
+                              <path class="skin" d="M202 150C216 152 226 164 228 188L233 240C234 262 236 272 238 290L244 380L228 384L220 318C217 296 212 286 210 270L206 228L204 200Z"/>
+                              <path class="skin" d="M228 380L245 378C250 392 252 410 248 428C246 438 238 442 232 438C226 430 224 410 226 396Z"/>
+                              <path class="skin shade" d="M228 392C222 398 220 408 222 415C226 415 229 408 230 401Z"/>
+                              <path class="shirt" d="M198 145C218 146 230 160 232 186L234 214C222 219 211 219 203 216L199 180Z"/>
+                            </g>
+                          </g>
+
+                          <g class="bm-part" data-area="chest">
+                            <path class="shirt" d="M124 140C104 144 94 152 92 170L96 228C98 250 103 272 105 300L195 300C197 272 202 250 204 228L208 170C206 152 196 144 176 140C168 147 160 149 150 149C140 149 132 147 124 140Z"/>
+                            <path class="bm-line" d="M131 141C139 150 161 150 169 141"/>
+                          </g>
+
+                          <g class="bm-part" data-area="head">
+                            <path class="skin" d="M136 108L136 136C136 144 164 144 164 136L164 108Z"/>
+                            <path class="skin shade" d="M136 124C144 131 156 131 164 124L164 136C164 144 136 144 136 136Z"/>
+                            <ellipse class="skin" cx="117" cy="80" rx="6" ry="11"/>
+                            <ellipse class="skin" cx="183" cy="80" rx="6" ry="11"/>
+                            <path class="skin" d="M150 30C172 30 184 48 183 72C182 92 175 108 162 116C157 119 143 119 138 116C125 108 118 92 117 72C116 48 128 30 150 30Z"/>
+                            <path class="hair" d="M116 76C110 42 128 22 152 22C177 22 192 42 184 76C182 62 177 52 168 46C152 53 133 52 122 46C119 54 117 64 116 76Z"/>
+                            <g class="bm-face">
+                              <path d="M131 68C135 65 141 65 145 67M155 67C159 65 165 65 169 68"/>
+                              <ellipse cx="138" cy="77" rx="3" ry="3.6"/>
+                              <ellipse cx="162" cy="77" rx="3" ry="3.6"/>
+                              <path d="M150 82C149 88 147 92 145 94C148 96 152 96 154 95"/>
+                              <path d="M142 104C147 107 153 107 158 104"/>
+                            </g>
+                          </g>
+                        </svg>
+
+
+                        <button class="body-point point-head" type="button" data-area="head"><span></span>Head or neck</button>
+                        <button class="body-point point-chest" type="button" data-area="chest"><span></span>Chest, abdomen or back</button>
+                        <button class="body-point point-hand" type="button" data-area="hand"><span></span>Arm or elbow</button>
+                        <button class="body-point point-leg" type="button" data-area="leg"><span></span>Hip or leg</button>
+                        <button class="body-point point-foot" type="button" data-area="foot"><span></span>Foot or heel</button>
+                    </div>
+                </div>
+
+
+                <!-- Step 2: photo tips -->
+                <div class="how-panel" id="how-panel-2" role="tabpanel">
+                    <p class="panel-caption">Photo tips</p>
+
+                    <div class="panel-split">
+                        <div class="cam-frame skin">
+                            <span class="wound"></span>
+                            <span class="cam-coin">₹5</span>
+                            <span class="cam-corner tl"></span>
+                            <span class="cam-corner tr"></span>
+                            <span class="cam-corner bl"></span>
+                            <span class="cam-corner br"></span>
+                        </div>
+
+                        <ul class="tip-list">
+                            <li>
+                                <svg class="icon"><use href="#i-check"/></svg>
+                                <div><strong>Use daylight</strong><span>Stand near a window and turn off the flash.</span></div>
+                            </li>
+                            <li>
+                                <svg class="icon"><use href="#i-check"/></svg>
+                                <div><strong>Get close</strong><span>Let the wound fill most of the photo.</span></div>
+                            </li>
+                            <li>
+                                <svg class="icon"><use href="#i-check"/></svg>
+                                <div><strong>Add a coin</strong><span>It shows the size, so weeks of photos can be compared.</span></div>
+                            </li>
+                            <li>
+                                <svg class="icon"><use href="#i-check"/></svg>
+                                <div><strong>Hold steady</strong><span>A sharp photo gives better guidance.</span></div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="quality-meter">
+                        <span>Photo quality</span>
+                        <div class="meter"><i style="width: 82%"></i></div>
+                        <strong>Good</strong>
+                    </div>
+                </div>
+
+
+                <!-- Step 3: questions -->
+                <div class="how-panel" id="how-panel-3" role="tabpanel">
+                    <p class="panel-caption">A few quick questions</p>
+
+                    <div class="mock-form">
+                        <div class="mock-row">
+                            <span>What kind of wound?</span>
+                            <strong class="mock-value">Diabetic foot ulcer</strong>
+                        </div>
+                        <div class="mock-row">
+                            <span>How long has it been open?</span>
+                            <strong class="mock-value">4 to 8 weeks</strong>
+                        </div>
+                        <div class="mock-row">
+                            <span>Pain</span>
+                            <div class="mock-pain">
+                                <div class="meter"><i style="width: 40%"></i></div>
+                                <strong>4 of 10</strong>
+                            </div>
+                        </div>
+                        <div class="mock-flags">
+                            <span>Any warning signs?</span>
+                            <label><i class="box"></i>Black or dying tissue</label>
+                            <label><i class="box"></i>Fever or feeling unwell</label>
+                            <label><i class="box"></i>More drainage, or a bad smell</label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Step 4: guidance -->
+                <div class="how-panel" id="how-panel-4" role="tabpanel">
+                    <p class="panel-caption">Your guidance</p>
+
+                    <div class="mock-result" data-level="amber">
+                        <div class="triage-scale">
+                            <span class="seg seg-green"></span>
+                            <span class="seg seg-amber"></span>
+                            <span class="seg seg-red"></span>
+                            <span class="triage-pin"></span>
+                        </div>
+                        <h4>See a doctor today</h4>
+                        <p>An ulcer on a diabetic foot needs a professional check, even when it looks settled.</p>
+                        <ol>
+                            <li>Keep all weight off the foot until you're seen.</li>
+                            <li>Clean it and re-dress it the way your clinic showed you.</li>
+                            <li>Book an appointment with your doctor or wound clinic today.</li>
+                        </ol>
+                    </div>
+                </div>
+
+
+                <!-- Step 5: tracker -->
+                <div class="how-panel" id="how-panel-5" role="tabpanel">
+                    <p class="panel-caption">Healing tracker</p>
+
+                    <div class="tracker-row">
+                        <figure>
+                            <div class="tracker-photo skin"><span class="wound" style="width: 64%"></span></div>
+                            <figcaption>Week 1</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="tracker-photo skin"><span class="wound" style="width: 48%"></span></div>
+                            <figcaption>Week 3</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="tracker-photo skin"><span class="wound" style="width: 30%"></span></div>
+                            <figcaption>Week 5</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="tracker-photo skin"><span class="wound" style="width: 14%"></span></div>
+                            <figcaption>Week 8</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="tracker-summary">
+                        <svg class="icon"><use href="#i-heal"/></svg>
+                        <div>
+                            <strong>Healing well</strong>
+                            <span>The ulcer has closed steadily week by week, so the dressing plan is working.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="how-copy" aria-live="polite">
+                <p class="how-num" id="howNum">Step 1 of 5</p>
+                <h3 id="howTitle">Choose where the wound is</h3>
+                <p id="howText">
+                    Tap the part of the body the wound is on. An ulcer on the
+                    heel is managed very differently from one on the lower leg,
+                    so this shapes the guidance you get.
+                </p>
+                <p class="how-note">
+                    <svg class="icon"><use href="#i-check"/></svg>
+                    <span id="howNote">Covers the common pressure points: heels, hips, tailbone and elbows.</span>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     Three clear answers
+========================= -->
+
+<section class="section section-white" id="guidance">
+    <div class="container">
+
+        <div class="section-head">
+            <h2>One clear answer, in one of three colours</h2>
+            <p>
+                No medical jargon. Every check ends with what to do next, so you
+                never have to guess.
+            </p>
+        </div>
+
+        <div class="bands">
+            <div class="band band-green">
+                <div class="band-name">
+                    <span class="band-dot"></span>
+                    <h3>Carry on with your care plan</h3>
+                </div>
+                <p>Keep to your dressing routine, offloading or compression, and take a new photo in a few days.</p>
+                <p class="band-examples">A surgical wound closing on time, an ulcer that's shrinking week on week.</p>
+            </div>
+
+            <div class="band band-amber">
+                <div class="band-name">
+                    <span class="band-dot"></span>
+                    <h3>Get the wound seen soon</h3>
+                </div>
+                <p>Book your doctor or wound clinic in the next day or two. For a diabetic foot ulcer, go the same day.</p>
+                <p class="band-examples">Any diabetic foot ulcer, a new pressure sore, growing redness, a wound open past four weeks.</p>
+            </div>
+
+            <div class="band band-red">
+                <div class="band-name">
+                    <span class="band-dot"></span>
+                    <h3>Get medical help now</h3>
+                </div>
+                <p>Go to the nearest emergency department or call 112 straight away.</p>
+                <p class="band-examples">Black or dying tissue, fever with shivering, red streaks up the limb, a cold or blue limb.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     Safety and privacy
+========================= -->
+
+<section class="section" id="safety">
+    <div class="container split">
+
+        <div class="section-head">
+            <h2>Built carefully, because it's your health</h2>
+            <p>
+                Photos of a wound are personal. HealthCare+ is designed to keep
+                them private and to be honest about what it can and can't do.
+            </p>
+
+            <figure class="section-photo">
+                <img src="photo-doctor.jpg" alt="A doctor in a white coat writing notes on a clipboard" loading="lazy" width="1000" height="750">
+            </figure>
+        </div>
+
+        <ul class="safety-list">
+            <li>
+                <span class="safety-icon"><svg class="icon"><use href="#i-lock"/></svg></span>
+                <div>
+                    <h3>Only you see your photos</h3>
+                    <p>Your photos and answers are never shared or sold, and never used for advertising.</p>
+                </div>
+            </li>
+            <li>
+                <span class="safety-icon"><svg class="icon"><use href="#i-trash"/></svg></span>
+                <div>
+                    <h3>Delete anything, any time</h3>
+                    <p>Remove any check from your history whenever you want.</p>
+                </div>
+            </li>
+            <li>
+                <span class="safety-icon"><svg class="icon"><use href="#i-shield"/></svg></span>
+                <div>
+                    <h3>Guidance, not a diagnosis</h3>
+                    <p>HealthCare+ helps you decide what to do next. Only a doctor can diagnose you.</p>
+                </div>
+            </li>
+            <li>
+                <span class="safety-icon"><svg class="icon"><use href="#i-doctor"/></svg></span>
+                <div>
+                    <h3>Works alongside your wound clinic</h3>
+                    <p>Your photos show how the wound has changed over weeks, which is useful to share at an appointment.</p>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     Questions
+========================= -->
+
+<section class="section section-white" id="faq">
+    <div class="container split">
+
+        <div class="section-head">
+            <h2>Questions people ask</h2>
+            <p>Can't find your answer? <a href="contact.html">Get in touch</a> and we'll help.</p>
+        </div>
+
+        <div class="faq-list">
+            <details>
+                <summary>Is this a medical diagnosis?</summary>
+                <p>
+                    No. HealthCare+ gives you guidance on what to do next, such as
+                    carrying on with your care plan or getting the wound seen. It
+                    doesn't replace your doctor or wound clinic, and if you're
+                    worried, you should always see them.
+                </p>
+            </details>
+
+            <details>
+                <summary>Can I use it for a fresh cut, burn or animal bite?</summary>
+                <p>
+                    No. HealthCare+ is built for wounds managed over weeks, such
+                    as diabetic foot ulcers, pressure sores, leg ulcers and
+                    surgical wounds. A new injury needs first aid and a doctor
+                    straight away, and an animal bite needs seeing the same day.
+                </p>
+            </details>
+
+            <details>
+                <summary>Who can see my photos?</summary>
+                <p>
+                    Only you. Your photos are linked to your account, and you can
+                    delete any of them whenever you like.
+                </p>
+            </details>
+
+            <details>
+                <summary>What should I do if my result is red?</summary>
+                <p>
+                    Get medical help straight away. Call 112 or go to the nearest
+                    emergency department. Don't wait to see whether it gets better.
+                </p>
+            </details>
+
+            <details>
+                <summary>How do I take a good photo?</summary>
+                <p>
+                    Take it just after the dressing comes off, in daylight, from
+                    the same angle each time. Get close, hold your phone steady
+                    and place a coin next to the wound to show its size. The app
+                    shows these tips before you upload.
+                </p>
+            </details>
+
+            <details>
+                <summary>Can I check a wound for someone I care for?</summary>
+                <p>
+                    Yes, as long as they're with you and agree to the photo. Many
+                    pressure sores and leg ulcers are looked after by a family
+                    member or carer, and the tracker is built with that in mind.
+                </p>
+            </details>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     Call to action
+========================= -->
+
+<section class="cta">
+    <div class="container cta-inner">
+        <div>
+            <h2>Follow your wound, week by week</h2>
+            <p>Create a free account and keep every photo and check in one private place.</p>
+        </div>
+
+        <div class="cta-actions">
+            <a class="btn btn-light btn-lg" href="signup.html">Create free account</a>
+            <a class="btn btn-outline-light btn-lg" href="login.html">Log in</a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+
+<!-- =========================
+     Footer
+========================= -->
+
+<footer class="site-footer">
+    <div class="container">
+
+        <div class="footer-grid">
+            <div>
+                <a class="brand" href="index.html">
+                    <span class="brand-mark"><svg class="icon"><use href="#i-plus"/></svg></span>
+                    HealthCare+
+                </a>
+                <p class="footer-about">
+                    HealthCare+ gives general guidance about long-term wound care
+                    and is not a substitute for professional medical advice,
+                    diagnosis or treatment.
+                </p>
+            </div>
+
+            <div>
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#helps">What it helps with</a></li>
+                    <li><a href="#how">How it works</a></li>
+                    <li><a href="#faq">Questions</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="legal.html#privacy">Privacy policy</a></li>
+                    <li><a href="legal.html#terms">Terms of use</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; <span data-year></span> HealthCare+</span>
+            <a class="footer-emergency" href="tel:112">In an emergency, call 112</a>
+        </div>
+
+    </div>
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
